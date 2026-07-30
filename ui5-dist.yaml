@@ -1,0 +1,33 @@
+specVersion: "3.1"
+metadata:
+  name: sap.ui.demo.productmanager
+type: application
+framework:
+  name: SAPUI5
+  version: "1.120.0"
+  libraries:
+    - name: sap.m
+    - name: sap.ui.core
+    - name: sap.f
+    - name: sap.ui.layout
+    - name: sap.ui.table
+    - name: sap.ui.unified
+    - name: sap.ushell
+    - name: themelib_sap_horizon
+builder:
+  resources:
+    excludes:
+      - "/test/**"
+      - "/localService/**"
+  customTasks:
+    - name: webide-extension-task-updateManifestJson
+      afterTask: replaceVersion
+      configuration:
+        appFolder: webapp
+        destDir: dist
+    - name: ui5-task-zipper
+      afterTask: generateCachebusterInfo
+      configuration:
+        archiveName: sapuidemoproductmanager
+        additionalFiles:
+          - xs-app.json

@@ -1,0 +1,21 @@
+# Dependency directories
+node_modules/
+package-lock.json
+
+# UI5 Tooling build outputs
+dist/
+build/
+resources/
+
+# MTA Build Output
+mta_archives/
+*.mtar
+Makefile*.mta
+_build/
+
+# OS/Editor files
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+.idea/

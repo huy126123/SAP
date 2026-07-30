@@ -1,0 +1,150 @@
+{
+  "products": [
+    {
+      "id": "PRD-001",
+      "name": "MacBook Pro 16\" M3 Max",
+      "category": "Electronics",
+      "price": 3499.00,
+      "currency": "USD",
+      "stock": 15,
+      "status": "In Stock",
+      "rating": 4.9,
+      "description": "Apple M3 Max chip with 16-core CPU and 40-core GPU, 64GB Unified Memory.",
+      "icon": "sap-icon://laptop"
+    },
+    {
+      "id": "PRD-002",
+      "name": "Dell UltraSharp 32\" 4K USB-C Monitor",
+      "category": "Electronics",
+      "price": 899.50,
+      "currency": "USD",
+      "stock": 8,
+      "status": "Low Stock",
+      "rating": 4.7,
+      "description": "31.5-inch 4K UHD IPS display with IPS Black technology and USB-C hub.",
+      "icon": "sap-icon://display"
+    },
+    {
+      "id": "PRD-003",
+      "name": "Logitech MX Master 3S Wireless Mouse",
+      "category": "Accessories",
+      "price": 99.99,
+      "currency": "USD",
+      "stock": 42,
+      "status": "In Stock",
+      "rating": 4.8,
+      "description": "Ergonomic performance mouse with 8K DPI optical sensor and quiet clicks.",
+      "icon": "sap-icon://mouse"
+    },
+    {
+      "id": "PRD-004",
+      "name": "Keychron Q1 Pro Mechanical Keyboard",
+      "category": "Accessories",
+      "price": 199.00,
+      "currency": "USD",
+      "stock": 0,
+      "status": "Out of Stock",
+      "rating": 4.6,
+      "description": "75% custom wireless mechanical keyboard with QMK/VIA support and aluminum chassis.",
+      "icon": "sap-icon://keyboard-and-mouse"
+    },
+    {
+      "id": "PRD-005",
+      "name": "Herman Miller Aeron Ergonomic Chair",
+      "category": "Furniture",
+      "price": 1450.00,
+      "currency": "USD",
+      "stock": 5,
+      "status": "Low Stock",
+      "rating": 4.9,
+      "description": "Iconic ergonomic office chair with Pellicle mesh and fully adjustable support.",
+      "icon": "sap-icon://chair"
+    },
+    {
+      "id": "PRD-006",
+      "name": "Uplift V2 Commercial Standing Desk",
+      "category": "Furniture",
+      "price": 799.00,
+      "currency": "USD",
+      "stock": 18,
+      "status": "In Stock",
+      "rating": 4.8,
+      "description": "Dual-motor height-adjustable standing desk with solid wood desktop.",
+      "icon": "sap-icon://functional-location"
+    },
+    {
+      "id": "PRD-007",
+      "name": "Sony WH-1000XM5 Noise Cancelling Headphones",
+      "category": "Electronics",
+      "price": 398.00,
+      "currency": "USD",
+      "stock": 24,
+      "status": "In Stock",
+      "rating": 4.7,
+      "description": "Industry-leading noise cancellation with 30-hour battery life and crystal-clear calls.",
+      "icon": "sap-icon://headset"
+    },
+    {
+      "id": "PRD-008",
+      "name": "Anker 737 Power Bank 24,000mAh",
+      "category": "Accessories",
+      "price": 149.99,
+      "currency": "USD",
+      "stock": 31,
+      "status": "In Stock",
+      "rating": 4.8,
+      "description": "140W two-way fast charging portable charger with smart digital display.",
+      "icon": "sap-icon://battery"
+    },
+    {
+      "id": "PRD-009",
+      "name": "SAP Build Work Zone Enterprise License",
+      "category": "Software",
+      "price": 2500.00,
+      "currency": "USD",
+      "stock": 99,
+      "status": "In Stock",
+      "rating": 5.0,
+      "description": "Enterprise cloud workspace integrating applications, data, and business workflows.",
+      "icon": "sap-icon://cloud"
+    },
+    {
+      "id": "PRD-010",
+      "name": "Epson EcoTank Pro L6580 Printer",
+      "category": "Office Supplies",
+      "price": 649.00,
+      "currency": "USD",
+      "stock": 3,
+      "status": "Low Stock",
+      "rating": 4.5,
+      "description": "High-speed all-in-one wireless inkjet printer with super-sized ink tanks.",
+      "icon": "sap-icon://print"
+    }
+  ],
+  "categories": [
+    {
+      "key": "All",
+      "text": "All Categories"
+    },
+    {
+      "key": "Electronics",
+      "text": "Electronics"
+    },
+    {
+      "key": "Accessories",
+      "text": "Accessories"
+    },
+    {
+      "key": "Furniture",
+      "text": "Furniture"
+    },
+    {
+      "key": "Software",
+      "text": "Software"
+    },
+    {
+      "key": "Office Supplies",
+      "text": "Office Supplies"
+    }
+  ]
+}

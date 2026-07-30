@@ -1,0 +1,29 @@
+{
+  "name": "sap.ui.demo.productmanager",
+  "version": "1.0.0",
+  "description": "SAP UI5 Freestyle Fiori Application - Product & Category Management with BTP and SAP Build Work Zone deployment support",
+  "private": true,
+  "scripts": {
+    "start": "ui5 serve --config ui5.yaml --open index.html",
+    "build:ui5": "ui5 build --config=ui5-dist.yaml --clean-dest --dest dist",
+    "build:mta": "mbt build",
+    "deploy": "cf deploy mta_archives/sap.ui.demo.productmanager_1.0.0.mtar",
+    "clean": "rimraf dist mta_archives"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@sap/ux-ui5-tooling": "^1.29.0",
+    "@sap/ui5-builder-webide-extension": "^1.1.10",
+    "@ui5/cli": "^4.0.0",
+    "mbt": "^1.2.49",
+    "rimraf": "^5.0.5",
+    "ui5-task-zipper": "^3.6.1"
+  },
+  "ui5": {
+    "dependencies": [
+      "@sap/ux-ui5-tooling",
+      "@sap/ui5-builder-webide-extension",
+      "ui5-task-zipper"
+    ]
+  }
+}

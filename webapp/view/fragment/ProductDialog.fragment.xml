@@ -1,0 +1,86 @@
+<core:FragmentDefinition
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core"
+  xmlns:form="sap.ui.layout.form">
+  <Dialog
+    id="productDialog"
+    title="{= ${view>/isEdit} ? ${i18n>dialogEditTitle} : ${i18n>dialogAddTitle} }"
+    contentWidth="36rem"
+    resizable="true"
+    draggable="true">
+    <content>
+      <form:SimpleForm
+        editable="true"
+        layout="ResponsiveGridLayout"
+        labelSpanXL="4"
+        labelSpanL="4"
+        labelSpanM="4"
+        labelSpanS="12"
+        adjustLabelSpan="false"
+        emptySpanXL="0"
+        emptySpanL="0"
+        emptySpanM="0"
+        emptySpanS="0"
+        columnsXL="1"
+        columnsL="1"
+        columnsM="1"
+        singleContainerFullSize="false">
+        <form:content>
+          <!-- Tên sản phẩm -->
+          <Label text="{i18n>labelName}" required="true" />
+          <Input
+            id="inputName"
+            value="{view>/currentProduct/name}"
+            placeholder="Enter product name..." />
+
+          <!-- Danh mục -->
+          <Label text="{i18n>labelCategory}" required="true" />
+          <Select
+            id="selectCategory"
+            selectedKey="{view>/currentProduct/category}">
+            <core:Item key="Electronics" text="Electronics" />
+            <core:Item key="Accessories" text="Accessories" />
+            <core:Item key="Furniture" text="Furniture" />
+            <core:Item key="Software" text="Software" />
+            <core:Item key="Office Supplies" text="Office Supplies" />
+          </Select>
+
+          <!-- Giá -->
+          <Label text="{i18n>labelPrice}" required="true" />
+          <Input
+            id="inputPrice"
+            type="Number"
+            value="{view>/currentProduct/price}"
+            placeholder="0.00" />
+
+          <!-- Tồn kho -->
+          <Label text="{i18n>labelStock}" required="true" />
+          <Input
+            id="inputStock"
+            type="Number"
+            value="{view>/currentProduct/stock}"
+            placeholder="1" />
+
+          <!-- Mô tả -->
+          <Label text="{i18n>labelDescription}" />
+          <TextArea
+            id="inputDescription"
+            value="{view>/currentProduct/description}"
+            rows="3"
+            placeholder="Enter short description..." />
+        </form:content>
+      </form:SimpleForm>
+    </content>
+    <beginButton>
+      <Button
+        text="{i18n>btnSave}"
+        type="Emphasized"
+        press=".onSaveProduct" />
+    </beginButton>
+    <endButton>
+      <Button
+        text="{i18n>btnCancel}"
+        press=".onCancelDialog" />
+    </endButton>
+  </Dialog>
+</core:FragmentDefinition>

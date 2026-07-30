@@ -1,0 +1,92 @@
+_schema-version: "3.2"
+ID: sap.ui.demo.productmanager
+version: 1.0.0
+description: "SAP UI5 Freestyle Fiori Application for Product & Category Management"
+
+parameters:
+  enable-parallel-deployments: true
+
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        - npm install
+
+modules:
+  - name: sapui5-fiori-app
+    type: html5
+    path: .
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm run build:ui5
+      supported-platforms: []
+    requires:
+      - name: sapui5-fiori-html5-repo-host
+
+  - name: sapui5-fiori-destination-content
+    type: com.sap.application.content
+    requires:
+      - name: sapui5-fiori-destination-service
+        parameters:
+          content-target: true
+      - name: sapui5-fiori-html5-repo-host
+        parameters:
+          service-key:
+            name: sapui5-fiori-html5-repo-host-key
+      - name: sapui5-fiori-xsuaa-service
+        parameters:
+          service-key:
+            name: sapui5-fiori-xsuaa-service-key
+    parameters:
+      content:
+        instance:
+          destinations:
+            - Name: sapui5_fiori_html5_repo_host
+              ServiceInstanceName: sapui5-fiori-html5-repo-host
+              ServiceKeyName: sapui5-fiori-html5-repo-host-key
+              sap.cloud.service: sapui5fiorimanager.service
+            - Authentication: OAuth2UserTokenExchange
+              Name: sapui5_fiori_xsuaa_service
+              ServiceInstanceName: sapui5-fiori-xsuaa-service
+              ServiceKeyName: sapui5-fiori-xsuaa-service-key
+              sap.cloud.service: sapui5fiorimanager.service
+          existing_destinations_policy: update
+    build-parameters:
+      no-source: true
+
+resources:
+  - name: sapui5-fiori-html5-repo-host
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-host
+
+  - name: sapui5-fiori-destination-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
+      config:
+        HTML5Runtime_enabled: true
+        init_data:
+          instance:
+            existing_destinations_policy: update
+            destinations:
+              - Name: sapui5fiorimanager-rt
+                Description: "Runtime destination for HTML5 application repo"
+                Authentication: NoAuthentication
+                ProxyType: Internet
+                Type: HTTP
+                URL: https://ui5.sap.com
+
+  - name: sapui5-fiori-xsuaa-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./xs-security.json
+      config:
+        xsappname: sapui5fiorimanager-${space}
+        tenant-mode: dedicated

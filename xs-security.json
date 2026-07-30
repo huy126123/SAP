@@ -1,0 +1,33 @@
+{
+  "xsappname": "sapui5fiorimanager",
+  "tenant-mode": "dedicated",
+  "description": "Security profile of Product Manager Fiori App",
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.Viewer",
+      "description": "View Products"
+    },
+    {
+      "name": "$XSAPPNAME.Manager",
+      "description": "Manage Products (Add/Edit/Delete)"
+    }
+  ],
+  "attributes": [],
+  "role-templates": [
+    {
+      "name": "Viewer",
+      "description": "Viewer Role",
+      "scope-references": [
+        "$XSAPPNAME.Viewer"
+      ]
+    },
+    {
+      "name": "Manager",
+      "description": "Manager Role",
+      "scope-references": [
+        "$XSAPPNAME.Viewer",
+        "$XSAPPNAME.Manager"
+      ]
+    }
+  ]
+}

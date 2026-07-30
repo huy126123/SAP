@@ -1,0 +1,185 @@
+<mvc:View
+  controllerName="sap.ui.demo.productmanager.controller.ProductList"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns:core="sap.ui.core"
+  xmlns:f="sap.f"
+  xmlns="sap.m"
+  displayBlock="true">
+
+  <Page
+    id="productListPage"
+    title="{i18n>appTitle}"
+    backgroundDesign="List">
+
+    <!-- Subheader chứa các bộ lọc (Filters) -->
+    <subHeader>
+      <Toolbar class="sapUiDemoFilterToolbar">
+        <!-- Tìm kiếm theo Tên sản phẩm -->
+        <SearchField
+          id="searchField"
+          placeholder="{i18n>searchPlaceholder}"
+          width="18rem"
+          liveChange=".onFilterChange"
+          search=".onFilterChange" />
+
+        <ToolbarSpacer width="1rem" />
+
+        <!-- Lọc theo Category -->
+        <Label text="{i18n>categoryFilterLabel}:" labelFor="categorySelect" />
+        <Select
+          id="categorySelect"
+          width="13rem"
+          items="{/categories}"
+          change=".onFilterChange">
+          <core:Item key="{key}" text="{text}" />
+        </Select>
+
+        <ToolbarSpacer width="1rem" />
+
+        <!-- Lọc theo giá tối đa -->
+        <Label text="Max Price ($):" labelFor="priceInput" />
+        <Input
+          id="priceInput"
+          type="Number"
+          width="9rem"
+          placeholder="e.g. 1000"
+          liveChange=".onFilterChange" />
+
+        <!-- Nút xóa bộ lọc -->
+        <Button
+          id="clearFiltersBtn"
+          icon="sap-icon://clear-filter"
+          text="{i18n>clearFilters}"
+          type="Transparent"
+          press=".onClearFilters" />
+      </Toolbar>
+    </subHeader>
+
+    <!-- Nội dung bảng Sản phẩm -->
+    <content>
+      <Table
+        id="productsTable"
+        items="{/products}"
+        inset="true"
+        class="sapUiDemoProductTable sapUiMediumMarginTopBottom"
+        growing="true"
+        growingThreshold="25">
+
+        <!-- Toolbar đầu bảng -->
+        <headerToolbar>
+          <OverflowToolbar>
+            <Title
+              text="{
+                parts: [
+                  'i18n>productCountText',
+                  '/products'
+                ],
+                formatter: '.formatProductTitle'
+              }"
+              level="H2" />
+            <ToolbarSpacer />
+            <Button
+              id="addProductBtn"
+              text="{i18n>addProductButton}"
+              type="Emphasized"
+              icon="sap-icon://add"
+              press=".onOpenAddDialog" />
+            <Button
+              id="refreshBtn"
+              icon="sap-icon://refresh"
+              tooltip="{i18n>refreshButton}"
+              type="Transparent"
+              press=".onRefreshData" />
+          </OverflowToolbar>
+        </headerToolbar>
+
+        <!-- Khai báo các Cột -->
+        <columns>
+          <Column width="7rem">
+            <Text text="{i18n>colId}" />
+          </Column>
+          <Column width="18rem">
+            <Text text="{i18n>colProduct}" />
+          </Column>
+          <Column width="10rem" minScreenWidth="Tablet" demandPopin="true">
+            <Text text="{i18n>colCategory}" />
+          </Column>
+          <Column width="9rem" hAlign="End">
+            <Text text="{i18n>colPrice}" />
+          </Column>
+          <Column width="11rem" hAlign="Center" minScreenWidth="Tablet" demandPopin="true">
+            <Text text="{i18n>colStock}" />
+          </Column>
+          <Column width="8rem" hAlign="Center">
+            <Text text="{i18n>colActions}" />
+          </Column>
+        </columns>
+
+        <!-- Template cho dòng Dữ liệu -->
+        <items>
+          <ColumnListItem vAlign="Middle">
+            <cells>
+              <!-- ID -->
+              <ObjectIdentifier title="{id}" />
+
+              <!-- Tên và Mô tả -->
+              <VBox class="sapUiTinyMarginTopBottom">
+                <Text text="{name}" class="sapUiDemoProductTitle" />
+                <Text text="{description}" class="sapUiDemoProductDesc" maxLines="2" />
+              </VBox>
+
+              <!-- Danh mục -->
+              <ObjectStatus
+                text="{category}"
+                icon="{icon}"
+                state="Information"
+                inverted="true"
+                class="sapUiDemoCategoryTag" />
+
+              <!-- Giá tiền -->
+              <ObjectNumber
+                number="{
+                  parts: [
+                    'price',
+                    'currency'
+                  ],
+                  formatter: '.formatter.currencyFormat'
+                }"
+                state="Success"
+                class="sapUiDemoProductPrice" />
+
+              <!-- Tồn kho và Trạng thái -->
+              <VBox alignItems="Center">
+                <ObjectStatus
+                  text="{status}"
+                  state="{
+                    path: 'status',
+                    formatter: '.formatter.statusState'
+                  }"
+                  icon="{
+                    path: 'status',
+                    formatter: '.formatter.statusIcon'
+                  }" />
+                <Text text="{stock} units" />
+              </VBox>
+
+              <!-- Các nút thao tác Sửa / Xóa -->
+              <HBox justifyContent="Center" class="sapUiDemoActionButtons">
+                <Button
+                  icon="sap-icon://edit"
+                  type="Transparent"
+                  tooltip="{i18n>dialogEditTitle}"
+                  press=".onOpenEditDialog" />
+                <Button
+                  icon="sap-icon://delete"
+                  type="Transparent"
+                  tooltip="Delete Product"
+                  press=".onDeleteProduct" />
+              </HBox>
+            </cells>
+          </ColumnListItem>
+        </items>
+      </Table>
+    </content>
+  </Page>
+</mvc:View>

@@ -1,0 +1,9 @@
+<mvc:View
+  controllerName="sap.ui.demo.productmanager.controller.App"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  displayBlock="true">
+  <App id="app">
+    <!-- Router se tu dong quan ly thuc thi nap ProductList View vao day -->
+  </App>
+</mvc:View>

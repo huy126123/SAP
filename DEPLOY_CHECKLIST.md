@@ -130,3 +130,33 @@ Sau khi lệnh `cf deploy` hoàn tất 100%:
 3. Tìm ứng dụng **Product Manager (`sap.ui.demo.productmanager`)** -> Nhấn **Add to My Content**.
 4. Vào **My Content** -> Gán ứng dụng vào **Catalog / Group** -> Phân quyền cho **Role** (`Everyone`).
 5. Mở trang chủ Launchpad Site, bạn sẽ thấy **Tile "Product Manager"** sẵn sàng phục vụ người dùng!
+
+---
+
+## 5. Khắc Phục Lỗi Thường Gặp Khi Build MTA (`make: *** [pre_validate] Error 1`)
+
+Nếu khi chạy `npm run build:mta` (`mbt build`) bạn gặp lỗi:
+```
+''C:' is not recognized as an internal or external command,
+operable program or batch file.
+make: *** [pre_validate] Error 1
+```
+### 💡 Nguyên nhân
+- Lệnh `mbt build` sinh ra file `Makefile_...mta` chứa đường dẫn tuyệt đối của dự án (`C:/Users/ASUS/OneDrive/Desktop/Shit Code/SAP`).
+- Do thư mục dự án của bạn có **khoảng trắng** (`Shit Code`), Makefile buộc phải bọc đường dẫn trong dấu ngoặc kép (`"C:/..."`).
+- Phiên bản **GnuWin32 `make.exe` 3.81** (bản cũ) khi gọi lệnh `cmd.exe /c` trên Windows gặp lỗi parse dấu ngoặc kép và dấu hai chấm (`:`), dẫn đến lỗi `'C:' is not recognized...`.
+
+### ✅ Cách Xử Lý Triệt Để (Chọn 1 trong 2 cách):
+
+#### Cách 1: Đơn giản nhất — Chuyển thư mục dự án sang đường dẫn không có khoảng trắng
+Vì lỗi chỉ xảy ra khi đường dẫn có dấu cách, bạn chỉ cần di chuyển thư mục `SAP` ra chỗ không có khoảng trắng, ví dụ:
+- Chuyển sang: `C:\Users\ASUS\Desktop\SAP` hoặc `C:\Projects\SAP`
+- Khi đó lệnh `npm run build:mta` với `make 3.81` sẽ chạy thành công 100% ngay lập tức mà không gặp bất kỳ lỗi quote nào!
+
+#### Cách 2: Cập nhật lên Make 4.x (Ezwinports / MSYS2 / Chocolatey)
+Nếu muốn giữ nguyên tên thư mục có dấu cách, bạn cần dùng phiên bản **GNU Make 4.3+** thay cho bản 3.81 cũ:
+```powershell
+# Cài bản Make mới qua Chocolatey
+choco install make -y
+```
+*(Bản Make 4.3 xử lý hoàn hảo dấu ngoặc kép và đường dẫn chứa khoảng trắng trên Windows).*
